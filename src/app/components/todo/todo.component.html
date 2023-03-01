@@ -1,0 +1,101 @@
+<app-utilisateur (utilisateurSelected)="utilisateurSelected=$event"></app-utilisateur>
+
+<h1>Liste de tâches</h1>
+
+<div class="todos" *ngIf="utilisateurSelected.nom">
+    <h2>Tâche de {{utilisateurSelected.prenom}} {{utilisateurSelected.nom}}</h2>
+    <div class="form-add-todo">
+        <label for="categorieSelected">Nouvelle tâche : </label>
+        <input  type="text" [(ngModel)]="toCreate.texte">
+        <label for="categorieSelected">Sa catégorie: </label>
+        <input type="text" [(ngModel)]="toCreate.categorie">
+        <button (click)="createTodo()">Enregistrer</button>
+    </div>
+    <app-categorie (categorieSelected)="categorieSelected=$event"></app-categorie>
+    
+</div>
+
+<div  class="todos" >
+    <h2>A Faire</h2>
+    <div *ngFor="let todo of todos$ |async">
+      
+            <div class="todo" *ngIf='!todo.done 
+            && (((todo.categorie==categorieSelected.libelle) || categorieSelected.libelle=="all")
+           &&(utilisateurSelected.id == todo.utilisateurId) || todo.isEditable)
+            '>
+                <h3
+                  *ngIf="!todo.isEditable "
+                  [class.done]="todo.done">
+                  {{ todo.texte }} ({{todo.categorie}})
+                </h3>
+                <input
+                  *ngIf="todo.isEditable"
+                  type="text"
+                  [(ngModel)]="todo.texte">  
+                  <input
+                  *ngIf="todo.isEditable"
+                  type="text"
+                  [(ngModel)]="todo.categorie">  
+                <div class="buttons">
+                  <button
+                    class="bt-check"
+                    (click)="editTodo(todo)">
+                    {{ todo.isEditable? '✔︎' : '✎' }}
+                  </button>
+                  <button
+                    class="bt-check"
+                    (click)="changeStateOfTodo(todo)">
+                    {{ todo.done? '✖︎' : '✔︎' }}
+                  </button>
+                  <button 
+                    class="bt-close" 
+                    (click)="onDelete(todo.id)">
+                    Supprimer</button>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+<div  class="todos">
+    <h2>Fait</h2>
+    <div *ngFor="let todo of todos$ |async">
+        <div class="todo" *ngIf='todo.done 
+        && (((todo.categorie==categorieSelected.libelle) || categorieSelected.libelle=="all")
+           &&(utilisateurSelected.id == todo.utilisateurId) || todo.isEditable)
+            '>
+            <h3
+              *ngIf="!todo.isEditable"
+              [class.done]="todo.done">
+              {{ todo.texte }} ({{todo.categorie}})
+            </h3>
+            <input
+              *ngIf="todo.isEditable"
+              type="text"
+              [(ngModel)]="todo.texte">  
+              <input
+              *ngIf="todo.isEditable"
+              type="text"
+              [(ngModel)]="todo.categorie">  
+
+            <div class="buttons">
+              <button
+                class="bt-check"
+                (click)="editTodo(todo)">
+                {{ todo.isEditable? '✔︎' : '✎' }}
+              </button>
+              <button
+                class="bt-check"
+                (click)="changeStateOfTodo(todo)">
+                {{ todo.done? '✖︎' : '✔︎' }}
+              </button>
+              <button 
+                class="bt-close" 
+                (click)="onDelete(todo.id)">
+                Supprimer</button>
+             </div>
+        </div>
+    </div>
+</div>
+
+
+<router-outlet></router-outlet>

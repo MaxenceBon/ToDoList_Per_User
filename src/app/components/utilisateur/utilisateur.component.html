@@ -1,0 +1,5 @@
+<h2>Liste des utilisateurs</h2>
+  <div class="list-group" *ngFor="let utilisateur of utilisateurs$|async"  
+        (click)="utilisateurSelected.emit(utilisateur)">
+        {{utilisateur.prenom}} {{utilisateur.nom}}
+  </div>

@@ -1,0 +1,45 @@
+{
+  "utilisateurs": [
+    {
+      "id": "1",
+      "nom": "Martin",
+      "prenom": "Luc"
+    },
+    {
+      "id": "2",
+      "nom": "Dupond",
+      "prenom": "Jean"
+    },
+    {
+      "id": "3",
+      "nom": "Blanc",
+      "prenom": "Richard"
+    }
+  ],
+  "todos": [
+    {
+      "id": "1",
+      "texte": "cuisiner",
+      "categorie": "Interieur",
+      "utilisateurId": "1",
+      "done": false
+    },
+    {
+      "texte": "Bricolage",
+      "categorie": "Exterieur",
+      "utilisateurId": "1",
+      "id": "G49dTjR",
+      "done": true
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "libelle": "Interieur"
+    },
+    {
+      "id": "2",
+      "libelle": "Exterieur"
+    }
+  ]
+}
